@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "author": "Ami Sung",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-pi-pico-w",
+      "id": "pico",
+      "top": 1.45,
+      "left": -0.85,
+      "rotate": 270,
+      "attrs": { "env": "micropython-20241129-v1.24.1" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 19.5,
+      "left": -226.2,
+      "attrs": { "temperature": "77.3", "humidity": "100" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 158.4,
+      "left": -259.75,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -48.6,
+      "left": -237,
+      "rotate": 90,
+      "attrs": { "color": "red", "xray": "1" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 198.4,
+      "left": -186.4,
+      "attrs": { "pins": "i2c" }
+    },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": 259.2, "left": -288.6, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": 259.96, "left": -259.2, "attrs": {} },
+    {
+      "type": "wokwi-led-ring",
+      "id": "ring1",
+      "top": -181.63,
+      "left": -32.34,
+      "attrs": { "pixels": "8" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -180,
+      "left": 97.8,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "dht1:VCC", "pico:3V3", "red", [ "v19.2", "h105.6", "v-105.6", "h96" ] ],
+    [ "dht1:GND", "pico:GND.1", "black", [ "v28.8", "h163.2" ] ],
+    [ "dht1:SDA", "pico:GP3", "green", [ "v48", "h192.1" ] ],
+    [ "dht1:VCC", "r1:1", "red", [ "v0" ] ],
+    [ "r1:2", "dht1:SDA", "green", [ "h28.8", "v-1.2" ] ],
+    [ "lcd1:SCL", "pico:GP1", "green", [ "h-28.8", "v-66.9", "h172.8" ] ],
+    [ "lcd1:SDA", "pico:GP0", "green", [ "h-19.2", "v-76.6", "h153.6" ] ],
+    [ "lcd1:GND", "gnd1:GND", "black", [ "h-96", "v-9.6" ] ],
+    [ "vcc1:VCC", "lcd1:VCC", "red", [ "v-48", "h28.8" ] ],
+    [ "ring1:GND", "gnd1:GND", "black", [ "v0", "h-326.4", "v336" ] ],
+    [ "ring1:VCC", "vcc1:VCC", "red", [ "v9.6", "h-326.4", "v364.8", "h9.6" ] ],
+    [ "pico:GP7", "ring1:DIN", "green", [ "v19.2", "h124.8", "v-230.4", "h-28.8" ] ],
+    [ "bz1:1", "gnd1:GND", "black", [ "v38.4", "h76.8", "v412.8", "h-172.8" ] ],
+    [ "bz1:2", "pico:GP15", "green", [ "v19.2", "h47.6", "v230.4", "h-48" ] ],
+    [ "pico:GP17", "btn1:1.r", "green", [ "v-57.91", "h0.04" ] ],
+    [ "btn1:2.r", "gnd1:GND", "black", [ "v0.7", "h-66.9" ] ]
+  ],
+  "dependencies": {}
+}

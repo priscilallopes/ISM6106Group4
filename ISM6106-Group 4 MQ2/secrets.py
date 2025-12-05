@@ -1,0 +1,2 @@
+SSID = 'Wokwi_GUEST'
+PASSWORD = ''

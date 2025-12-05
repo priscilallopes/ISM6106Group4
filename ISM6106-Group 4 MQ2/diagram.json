@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "author": "Ami Sung",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-pi-pico-w",
+      "id": "pico",
+      "top": 1.45,
+      "left": -0.85,
+      "rotate": 270,
+      "attrs": { "env": "micropython-20241129-v1.24.1" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": -35.7, "left": -156.2, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -48.6,
+      "left": -237,
+      "rotate": 90,
+      "attrs": { "color": "red", "xray": "1" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 198.4,
+      "left": -186.4,
+      "attrs": { "pins": "i2c" }
+    },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": 259.2, "left": -288.6, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": 259.96, "left": -259.2, "attrs": {} },
+    {
+      "type": "wokwi-led-ring",
+      "id": "ring1",
+      "top": -181.63,
+      "left": -32.34,
+      "attrs": { "pixels": "8" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -180,
+      "left": 97.8,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "gas1:VCC", "pico:3V3", "red", [ "h0" ] ],
+    [ "gas1:GND", "pico:GND.7", "black", [ "h0" ] ],
+    [ "gas1:AOUT", "pico:GP26", "green", [ "h0" ] ],
+    [ "lcd1:SCL", "pico:GP1", "green", [ "h-28.8", "v-66.9", "h172.8" ] ],
+    [ "lcd1:SDA", "pico:GP0", "green", [ "h-19.2", "v-76.6", "h153.6" ] ],
+    [ "lcd1:GND", "gnd1:GND", "black", [ "h-96", "v-9.6" ] ],
+    [ "vcc1:VCC", "lcd1:VCC", "red", [ "v-48", "h28.8" ] ],
+    [ "ring1:GND", "gnd1:GND", "black", [ "v0", "h-326.4", "v336" ] ],
+    [ "ring1:VCC", "vcc1:VCC", "red", [ "v9.6", "h-326.4", "v364.8", "h9.6" ] ],
+    [ "pico:GP7", "ring1:DIN", "green", [ "v19.2", "h124.8", "v-230.4", "h-28.8" ] ],
+    [ "bz1:1", "gnd1:GND", "black", [ "v38.4", "h76.8", "v412.8", "h-172.8" ] ],
+    [ "bz1:2", "pico:GP15", "green", [ "v19.2", "h47.6", "v230.4", "h-48" ] ],
+    [ "btn1:2.r", "gnd1:GND", "black", [ "v10.3", "h-114.9", "v240" ] ],
+    [ "pico:GP17", "btn1:1.r", "green", [ "v-48.31", "h0.04", "v28.8", "h-316.8" ] ]
+  ],
+  "dependencies": {}
+}
